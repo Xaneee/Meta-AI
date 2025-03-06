@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  meta-ai:
+    image: python:3.10
+    container_name: meta-ai
+    restart: always
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["bash", "meta_ai_deployment.sh"]
+    ports:
+      - "8080:8080"
