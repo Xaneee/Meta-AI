@@ -1,5 +1,2 @@
 flask
-logging
-threading
-os
-json
+gunicorn
