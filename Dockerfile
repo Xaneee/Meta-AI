@@ -19,5 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose the Flask app port
 EXPOSE 5000
 
+# Explicitly set Flask environment variables
+ENV FLASK_APP=edithra_ai.py
+ENV FLASK_ENV=production
+
 # Run the application with Gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "edithra_ai:app"]
