@@ -147,7 +147,13 @@ def deploy():
     logging.info("Edithra AI Deployment Started")
     os.system("apt-get update && apt-get install -y python3 python3-pip")
     os.system("pip3 install flask requests")
-    os.system("python3 -m flask run --host=0.0.0.0 --port=5000")
+    
+    # Explicitly set Flask App Environment Variable
+    os.environ["FLASK_APP"] = "edithra_ai.py"
+    os.environ["FLASK_ENV"] = "production"
+
+    # Run Flask App
+    os.system("flask run --host=0.0.0.0 --port=5000")
 
 # 🚀 MAIN EXECUTION
 if __name__ == "__main__":
