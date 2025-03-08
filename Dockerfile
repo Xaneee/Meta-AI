@@ -7,14 +7,14 @@ WORKDIR /app
 # Copy the application files
 COPY . /app
 
-# Upgrade pip, setuptools, and wheel before installing dependencies
+# Upgrade pip, setuptools, and wheel BEFORE installing dependencies
 RUN pip install --upgrade pip setuptools wheel
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the Flask app port
 EXPOSE 5000
 
-# Run the application
-CMD ["python", "edithra_ai.py"]
+# Run the application with Gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "edithra_ai:app"]
