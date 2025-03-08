@@ -1,13 +1,17 @@
 version: "3.8"
 
 services:
-  meta-ai:
-    image: python:3.10
-    container_name: meta-ai
-    restart: always
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: ["bash", "meta_ai_deployment.sh"]
+  edithra_ai:
+    build: .
     ports:
-      - "8080:8080"
+      - "5000:5000"
+    environment:
+      - FLASK_APP=edithra_ai.py
+      - FLASK_ENV=production
+    depends_on:
+      - redis
+    restart: always
+
+  redis:
+    image: "redis:alpine"
+    restart: always
