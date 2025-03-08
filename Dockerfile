@@ -7,7 +7,10 @@ WORKDIR /app
 # Copy the application files
 COPY . /app
 
-# Upgrade pip, setuptools, and wheel BEFORE installing dependencies
+# Install system dependencies
+RUN apt-get update && apt-get install -y build-essential libffi-dev python3-dev
+
+# Upgrade pip, setuptools, and wheel before installing dependencies
 RUN pip install --upgrade pip setuptools wheel
 
 # Install Python dependencies
