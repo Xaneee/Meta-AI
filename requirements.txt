@@ -1,5 +1,6 @@
-flask
-requests
-gunicorn
-logging
-threading
+flask==3.0.0
+requests==2.32.3
+gunicorn==20.1.0
+setuptools==68.0.0
+wheel==0.40.0
+werkzeug==3.0.1
