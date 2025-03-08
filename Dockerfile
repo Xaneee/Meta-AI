@@ -1,26 +1,20 @@
-# Use the latest Python base image
-FROM python:3.10-slim
+# Use an official lightweight Python image
+FROM python:3.10
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy all project files to the container
-COPY . .
+# Copy the application files
+COPY . /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    libc6 \
-    && rm -rf /var/lib/apt/lists/*
+# Upgrade pip, setuptools, and wheel before installing dependencies
+RUN pip install --upgrade pip setuptools wheel
 
-# Install required Python dependencies
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the Flask port
+# Expose the Flask app port
 EXPOSE 5000
 
-# Set environment variables
-ENV FLASK_APP=edithra_ai.py
-ENV FLASK_ENV=production
-
-# Start the application using Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "edithra_ai:app"]
+# Run the application
+CMD ["python", "edithra_ai.py"]
